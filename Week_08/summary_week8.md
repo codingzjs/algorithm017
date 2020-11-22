@@ -1,7 +1,7 @@
 ## 第八周学习笔记
 
 ### 十大经典排序算法python实现
-#### 选择排序
+#### 1.选择排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -14,7 +14,7 @@ class Solution:
                     #print(nums)
         return nums
 ```
-#### 冒泡排序
+#### 2.冒泡排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -27,7 +27,7 @@ class Solution:
                  nums[i - 1], nums[i] = nums[i], nums[i - 1]
         return nums
 ```
-#### 插入排序
+#### 3.插入排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -39,7 +39,7 @@ class Solution:
                 i -= 1
         return nums
 ```
-#### 希尔排序
+#### 4.希尔排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -54,7 +54,7 @@ class Solution:
             gap //= 2
         return nums
 ```
-#### 归并排序
+#### 5.归并排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -73,7 +73,7 @@ class Solution:
         res.reverse()
         return (left or right) + res  # 将剩余left或right中的数和res合并
 ```
-#### 快速排序
+#### 6.快速排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -104,7 +104,7 @@ class Solution:
             self.quickSorthepler(alist,first,pointmark-1)
             self.quickSorthepler(alist, pointmark + 1, last)
 ```
-#### 堆排序
+#### 7.堆排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -132,7 +132,7 @@ class Solution:
             build_heap(nums,0,i)  #调整
         return nums
 ```
-#### 计数排序
+#### 8.计数排序
 ```python
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
@@ -148,4 +148,57 @@ class Solution:
             return B
         res = counter_sort(nums)
         return res
+```
+#### 9.桶排序
+```python
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        #bucket sort
+        if len(nums) < 2:
+            return nums
+        _min = min(nums)
+        _max = max(nums)
+        # 需要桶个数
+        bucketNum = (_max - _min) // bucketSize + 1
+        buckets = [[] for _ in range(bucketNum)]
+        for num in nums:
+            # 放入相应的桶中
+            buckets[(num - _min) // bucketSize].append(num)
+        res = []
+
+        for bucket in buckets:
+            if not bucket: continue
+            if bucketSize == 1:
+                res.extend(bucket)
+            else:
+                # 当都装在一个桶里,说明桶容量大了
+                if bucketNum == 1:
+                    bucketSize -= 1
+                res.extend(bucket_sort(bucket, bucketSize))
+        return res
+```
+#### 10.基数排序
+```python
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        #radix sort
+        if not nums: return []
+        _max = max(nums)
+        # 最大位数
+        maxDigit = len(str(_max))
+        bucketList = [[] for _ in range(10)]
+        # 从低位开始排序
+        div, mod = 1, 10
+        for i in range(maxDigit):
+            for num in nums:
+                bucketList[num % mod // div].append(num)
+            div *= 10
+            mod *= 10
+            idx = 0
+            for j in range(10):
+                for item in bucketList[j]:
+                    nums[idx] = item
+                    idx += 1
+                bucketList[j] = []
+        return nums
 ```
