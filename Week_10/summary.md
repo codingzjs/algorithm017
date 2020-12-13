@@ -1,39 +1,18 @@
-## 第九周学习笔记
+## 毕业总结
 
-#### 63. 不同路径 II
-[leetcode#63-unique-paths-ii](https://leetcode-cn.com/problems/unique-paths-ii/)
-```python
-#状态转移方程：dp[i][j]=dp[i−1,j]+dp[i,j−1] if(i,j)上无障碍物
-# dp[i][j]= 0 if(i,j)上有障碍物
-# dp[i][j] 表示走到格子(i,j)的方法数
-class Solution(object):
-    def uniquePathsWithObstacles(self, obstacleGrid):
-
-        r, l = len(obstacleGrid), len(obstacleGrid[0])
-
-        for i in range(r):
-
-            for j in range(l):
-
-                if obstacleGrid[i][j] != 1:
-
-                    if i == 0 and j == 0:
-
-                        obstacleGrid[i][j] = 1
-
-                    elif i == 0 and j != 0:
-
-                        obstacleGrid[i][j] = obstacleGrid[i][j-1]
-
-                    elif i != 0 and j == 0:
-
-                        obstacleGrid[i][j] = obstacleGrid[i - 1][j]
-
-                    else:
-                        obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1]
-
-                else:
-                    obstacleGrid[i][j] = 0
-
-        return obstacleGrid[r - 1][l - 1]
-```
+#### 学习要点
+#####五毒神掌
+1. 第一遍
+五分钟：读题 + 思考
+直接看解法：多看几种，比较解法优劣
+背诵、默写好的解法
+2. 第二遍
+马上自己写 ——> Leetcode提交
+多种解法比较、体会 ——> 优化！
+3. 第三遍
+过了一天后，再重复做题
+不同解法的熟练程度——>专项练习
+4. 第四遍
+过了一周后：反复回来练习相同的题目
+5. 第五遍
+面试前一周恢复性训练
